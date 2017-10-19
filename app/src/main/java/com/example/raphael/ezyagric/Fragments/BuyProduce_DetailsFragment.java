@@ -33,7 +33,6 @@ public class BuyProduce_DetailsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,21 +43,7 @@ public class BuyProduce_DetailsFragment extends Fragment {
 
 
         Context context = getActivity().getApplicationContext();
-        FabInsure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //add the details of the crop and move with them
 
-                Intent l = new Intent(getActivity(), PostActivity.class);
-                l.putExtra("EXTRA_SESSION_ID", "Maize 2");
-//                l.putExtra("crop", "General maize");
-                startActivity(l);
-
-//                var activity2 = new Intent (this, typeof(Activity2));
-//                activity2.PutExtra ("MyData", "Data from Activity1");
-//                StartActivity (activity2);
-            }
-        });
 
         Crop = (TextView) view.findViewById(R.id.crop);
         Variety = (TextView) view.findViewById(R.id.variety);
@@ -74,16 +59,34 @@ public class BuyProduce_DetailsFragment extends Fragment {
         JsonElement element = new Gson().fromJson(value, JsonElement.class);
         JsonObject jsonObj = element.getAsJsonObject();
 
-        Crop.setText("Crop: " + jsonObj.get("crop").getAsString());
-        Variety.setText("Variety: " + jsonObj.get("variety").getAsString());
-        Quantity.setText("Quantity: " + jsonObj.get("quantity").getAsString()+" kg");
-        Price.setText("Price: " + jsonObj.get("price").getAsString());
-        Description.setText("Description: " + jsonObj.get("description").getAsString());
-        DATEPOSTED.setText("Date Posted: " + jsonObj.get("time").getAsString());
-        LOCATION.setText("Location: " + jsonObj.get("location").getAsString());
+        Crop.setText(jsonObj.get("crop").getAsString());
+        Variety.setText(jsonObj.get("variety").getAsString());
+        Quantity.setText(jsonObj.get("quantity").getAsString()+" kg");
+        Price.setText(jsonObj.get("price").getAsString());
+        Description.setText(jsonObj.get("description").getAsString());
+        DATEPOSTED.setText(jsonObj.get("time").getAsString());
+        LOCATION.setText(jsonObj.get("location").getAsString());
 
         Glide.with(context).load(Utils.IMAGE_URLS + jsonObj.get("photo_url").getAsString()).into(imageView);
 
+        FabInsure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //add the details of the crop and move with them
+                String value = getArguments().getString("YourKey");
+                JsonElement element = new Gson().fromJson(value, JsonElement.class);
+                JsonObject jsonObj = element.getAsJsonObject();
+
+                Intent l = new Intent(getActivity(), PostActivity.class);
+                l.putExtra("crop", jsonObj.get("crop").getAsString());
+                l.putExtra("variety", jsonObj.get("variety").getAsString());
+                l.putExtra("desc", jsonObj.get("description").getAsString());
+                l.putExtra("price", jsonObj.get("price").getAsString());
+                l.putExtra("quantity", jsonObj.get("quantity").getAsString());
+                startActivity(l);
+
+            }
+        });
         return view;
     }
 }

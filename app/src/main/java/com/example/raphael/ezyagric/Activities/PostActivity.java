@@ -23,7 +23,7 @@ public class PostActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //String text = getIntent().getStringExtra("EXTRA_SESSION_ID"); // data from another activity
+//        String text = getIntent().getStringExtra("EXTRA_SESSION_ID"); // data from another activity
         getSupportActionBar().setTitle("Sell produce");
 
         FragmentManager fragmentManager = getSupportFragmentManager();

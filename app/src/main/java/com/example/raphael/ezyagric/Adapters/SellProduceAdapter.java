@@ -58,9 +58,6 @@ public class SellProduceAdapter extends RecyclerView.Adapter<SellProduceAdapter.
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.sell_produce_list, parent, false);
-
-//        .inflate(R.layout.sell_produce_card, parent, false);
-
         return new MyViewHolder(itemView);
     }
 

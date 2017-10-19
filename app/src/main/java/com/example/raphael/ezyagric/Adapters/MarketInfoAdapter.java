@@ -34,7 +34,7 @@ public class MarketInfoAdapter extends RecyclerView.Adapter<MarketInfoAdapter.My
             super(view);
             MARKET = (TextView) view.findViewById(R.id.market);
             COMMODITY = (TextView) view.findViewById(R.id.commodity);
-            UNIT = (TextView) view.findViewById(R.id.unit);
+//            UNIT = (TextView) view.findViewById(R.id.unit);
             WHOLESALEPRICE = (TextView) view.findViewById(R.id.wPrice);
             RETAILPRICE = (TextView) view.findViewById(R.id.rPrice);
         }
@@ -58,13 +58,13 @@ public class MarketInfoAdapter extends RecyclerView.Adapter<MarketInfoAdapter.My
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         try {
             JsonObject ins = albumList.get(position);
-            holder.MARKET.setText("Market: " + ins.get("market").getAsString());
-            holder.COMMODITY.setText("Commodity: " + ins.get("commodity").getAsString());
-            holder.UNIT.setText("Unit: " + ins.get("unit").getAsString());
-            holder.WHOLESALEPRICE.setText("Whole sale Price: " + ins.get("wholesaleprice").getAsString());
-            holder.RETAILPRICE.setText("Retail Price: " + ins.get("retailprice").getAsString());
-//            Glide.with(mContext).load(Utils.IMAGE_URL + ins.get("image").getAsString()).into(holder.thumbnail);
-//            Log.e("Path", Utils.IMAGE_URL + ins.get("image").getAsString());
+//            if (ins.get("commodity").getAsString() == "Maize") {
+                holder.MARKET.setText(ins.get("market").getAsString() + " market");
+                holder.COMMODITY.setText("Commodity: " + ins.get("commodity").getAsString());
+
+                holder.WHOLESALEPRICE.setText("Whole sale: " + ins.get("wholesaleprice").getAsString() + " ugx per " + ins.get("unit").getAsString() + "");
+                holder.RETAILPRICE.setText("Retail Price: " + ins.get("retailprice").getAsString() + " ugx per " + ins.get("unit").getAsString() + "");
+//            }
         } catch (Exception e) {
             Log.e("CART", e.toString());
         }

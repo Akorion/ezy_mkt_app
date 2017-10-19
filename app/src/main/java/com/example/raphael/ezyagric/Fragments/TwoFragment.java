@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.raphael.ezyagric.Adapters.FarmerAdapter;
 import com.example.raphael.ezyagric.Adapters.PostProduceAdapter;
@@ -63,7 +64,7 @@ public class TwoFragment extends Fragment{
             @Override
             public void onClick(View view, int position) {
                 String data = new Gson().toJson(ins.get(position));
-                SuppliesDetailsFragment ldf = new SuppliesDetailsFragment();
+                TwoFragment ldf = new TwoFragment();
                 Bundle args = new Bundle();
                 args.putString("YourKey", data);
                 ldf.setArguments(args);
@@ -71,6 +72,9 @@ public class TwoFragment extends Fragment{
                 getFragmentManager().beginTransaction().replace(R.id.container, ldf)
                         .addToBackStack(null)
                         .commit();
+
+                Toast.makeText(getActivity(),"agent clicked",Toast.LENGTH_SHORT).show();
+
 
             }
 

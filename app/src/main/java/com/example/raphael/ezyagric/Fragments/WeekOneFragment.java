@@ -1,7 +1,5 @@
 package com.example.raphael.ezyagric.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,14 +14,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.raphael.ezyagric.Adapters.MarketInfoAdapter;
-import com.example.raphael.ezyagric.Adapters.SellProduceAdapter;
 import com.example.raphael.ezyagric.Couchdb.CouchdbMarketInfo;
-import com.example.raphael.ezyagric.Couchdb.CouchdbSellProduce;
 import com.example.raphael.ezyagric.Globals.ClickListener;
 import com.example.raphael.ezyagric.Globals.RecyclerTouchListener;
 import com.example.raphael.ezyagric.R;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
+
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 
@@ -42,7 +42,6 @@ public class WeekOneFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_week_one, container, false);
         _RecyclerViewLayout = (RelativeLayout) view.findViewById(R.id.rv);
@@ -84,7 +83,15 @@ public class WeekOneFragment extends Fragment {
             adapter = new MarketInfoAdapter(getActivity(), ins);
             recyclerView.setAdapter(adapter);
             ins.clear();
-            ins.addAll(couchdbMarketInfo.allCrops());
+            final DateTime input = new DateTime();
+
+//            final LocalDate startOfThisWeek = new LocalDate().dayOfWeek().withMinimumValue();
+            final LocalDate startOfThisWeek = new LocalDate(input.withDayOfWeek(DateTimeConstants.MONDAY));
+//            print(new LocalDate().dayOfWeek().withMinimumValue());
+            final LocalDate endOfThisWeek = startOfThisWeek.plusDays(6);
+
+
+            ins.addAll(couchdbMarketInfo.allCrops(startOfThisWeek, endOfThisWeek));
             Log.e("TAG",ins.toString());
             adapter.notifyDataSetChanged();
             if (ins.isEmpty()) {

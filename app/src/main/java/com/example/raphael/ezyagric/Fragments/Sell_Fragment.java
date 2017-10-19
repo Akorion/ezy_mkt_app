@@ -92,7 +92,6 @@ public class Sell_Fragment extends Fragment {
         });
 
         imageview = (ImageView) view.findViewById(R.id.iv);
-
         dialog = new ProgressDialog(getActivity());
         dialog.setMessage("Saving Data...");
         dialog.setCancelable(false);
@@ -247,8 +246,8 @@ public class Sell_Fragment extends Fragment {
             params.put("crop", crop);
 //            params.put("unique_id", unique_id);
             params.put("time", GlobalFunctions.getCurrentTime());
-//            params.put("first_name", first_name);
             params.put("variety", variety);
+//            params.put("type", "ma_sales");
             params.put("quantity", quantity);
             params.put("description", description);
             params.put("price", price);

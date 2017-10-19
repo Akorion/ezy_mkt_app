@@ -10,6 +10,7 @@ import com.example.raphael.ezyagric.Fragments.BuyProduceFragment;
 import com.example.raphael.ezyagric.Fragments.MarketInfoFragment;
 import com.example.raphael.ezyagric.R;
 
+// ------------------------------------------------------------- supply produce menu clicked
 public class Buy_Produce extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -22,7 +23,7 @@ public class Buy_Produce extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Buy Produce");
+        getSupportActionBar().setTitle("Supply Produce");
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 

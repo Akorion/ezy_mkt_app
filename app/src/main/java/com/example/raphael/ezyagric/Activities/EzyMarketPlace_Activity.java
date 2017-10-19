@@ -23,16 +23,16 @@ public class EzyMarketPlace_Activity extends AppCompatActivity {
         MarketInfo = (CardView) findViewById(R.id.card_view_plant);
         Reports = (CardView) findViewById(R.id.card_view_inputs);
 
+        //market info fragment
         MarketInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent l = new Intent(EzyMarketPlace_Activity.this, Market_Info.class);
-
                 Intent l = new Intent(EzyMarketPlace_Activity.this, MarketsPricesActivity.class);
                 startActivity(l);
             }
         });
 
+// ------------------------------------------------------ selling of ur produce
         Sell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +41,7 @@ public class EzyMarketPlace_Activity extends AppCompatActivity {
             }
         });
 
+// ------------------------------------------------------ suply market requested produce
         Buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +49,7 @@ public class EzyMarketPlace_Activity extends AppCompatActivity {
                 startActivity(l);
             }
         });
-
+// ------------------------------------------------------ reports fragment
         Reports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

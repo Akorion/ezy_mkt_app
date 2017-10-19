@@ -24,6 +24,11 @@ import com.example.raphael.ezyagric.Globals.RecyclerTouchListener;
 import com.example.raphael.ezyagric.R;
 import com.google.gson.JsonObject;
 
+import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.LocalDate;
+
 import java.util.ArrayList;
 
 
@@ -83,8 +88,12 @@ public class MarketInfoFragment extends Fragment {
             adapter = new MarketInfoAdapter(getActivity(), ins);
             recyclerView.setAdapter(adapter);
             ins.clear();
-            ins.addAll(couchdbMarketInfo.allCrops());
-            Log.e("TAG",ins.toString());
+            DateTime input = new DateTime();
+            final LocalDate startOfWeek = new LocalDate(input.minusWeeks(0).withDayOfWeek(DateTimeConstants.MONDAY));
+            final LocalDate endOfWeek = startOfWeek.plusDays(6);
+
+            ins.addAll(couchdbMarketInfo.allCrops(startOfWeek, endOfWeek));
+            Log.e("Market info reached\n",ins.toString());
             adapter.notifyDataSetChanged();
             if (ins.isEmpty()) {
                 _RecyclerViewLayout.setVisibility(View.GONE);

@@ -29,7 +29,7 @@ import java.util.Map;
 public class CouchdbSellProduce {
     private static final String TAG = "SELLS";
     private static final String DOC_TYPE = "sell_produce";
-    private static final String VIEW_NAME = "SELL";
+    private static final String VIEW_NAME = "crops";
 
     private Context CONTEXT = null;
     private static CouchdbManager couchdbManager;
@@ -49,15 +49,16 @@ public class CouchdbSellProduce {
         for (Iterator<QueryRow> it = res; it.hasNext(); ) {
             QueryRow row = it.next();
             try {
-//                Log.e("FARMERS",row.getDocument().getProperties().toString());
+                Log.e("Sales data\n",row.getDocument().getProperties().toString());
 //                farmers.add(this.propToJSON(row.getDocument().getProperties()));
 
                 JsonElement element = new Gson().fromJson (new Gson().toJson(row.getKey()), JsonElement.class);
                 JsonObject jsonObj = element.getAsJsonObject();
                 farmers.add(jsonObj);
 
-            } catch (Exception e) {
 
+            } catch (Exception e) {
+                Log.e("Sales Exp:\t", e.getMessage());
             }
 
         }

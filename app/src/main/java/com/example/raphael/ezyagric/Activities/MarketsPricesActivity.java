@@ -56,10 +56,10 @@ public class MarketsPricesActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new WeekOneFragment(), "WEEK 1");
-        adapter.addFragment(new WeekTwoFragment(), "WEEK 2");
-        adapter.addFragment(new WeekThreeFragment(), "WEEK 3");
-        adapter.addFragment(new WeekFourFragment(), "WEEK 4");
+        adapter.addFragment(new WeekOneFragment(), "1 week");
+        adapter.addFragment(new WeekTwoFragment(), "2 weeks");
+        adapter.addFragment(new WeekThreeFragment(), "3 weeks");
+        adapter.addFragment(new WeekFourFragment(), "4 weeks");
         viewPager.setAdapter(adapter);
     }
 

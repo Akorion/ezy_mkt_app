@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.content.Intent.*;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
@@ -93,12 +94,25 @@ public class PostFragment extends Fragment {
         dialog.setCancelable(false);
 
         Crop = (EditText) view.findViewById(R.id.crop);
-//        FarmerName = (EditText) view.findViewById(R.id.farmer_name);
         Variety = (EditText) view.findViewById(R.id.variety);
         Quantity = (EditText) view.findViewById(R.id.quantity);
         Description = (Spinner) view.findViewById(R.id.describeSpinner);
         Districts = (Spinner) view.findViewById(R.id.districtSpinner);
         Price = (EditText) view.findViewById(R.id.price);
+
+        String crop_text = getActivity().getIntent().getStringExtra("crop");
+        String variety_text = getActivity().getIntent().getStringExtra("variety");
+        String desc_text = getActivity().getIntent().getStringExtra("desc");
+        String price_text = getActivity().getIntent().getStringExtra("price");
+        String quantity_text = getActivity().getIntent().getStringExtra("quantity");
+
+        Crop.setText(crop_text);
+        Variety.setText(variety_text);
+        Description.setPrompt("Produce status");
+        Price.setText(price_text);
+        Quantity.setText(quantity_text);
+
+
 //        Farmer_name = (LinearLayout) view.findViewById(R.id.hide_name);
 
 //        //value received from the farmer fragment is here

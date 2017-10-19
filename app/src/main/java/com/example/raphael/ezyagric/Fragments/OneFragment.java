@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.raphael.ezyagric.Activities.Farmer_detail;
 import com.example.raphael.ezyagric.Adapters.FarmerAdapter;
@@ -55,7 +56,8 @@ public class OneFragment extends Fragment{
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         couchdbSellProduce = new CouchdbSellProduce(getActivity());
-        getInsurance();
+        couchdbSellProduce.sync();
+        getSales();
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
             @Override
@@ -64,7 +66,7 @@ public class OneFragment extends Fragment{
                 String data = new Gson().toJson(ins.get(position));
                 SalesDetailsFragment ldf = new SalesDetailsFragment();
                 Bundle args = new Bundle();
-                args.putString("YourKey", data);
+                args.putString("Sales_key", data);
                 ldf.setArguments(args);
 
                 getFragmentManager().beginTransaction().replace(R.id.container, ldf)
@@ -72,26 +74,25 @@ public class OneFragment extends Fragment{
                         .commit();
             }
 
-            @Override
-            public void onLongClick(View view, int position) {
+//            @Override
+//            public void onLongClick(View view, int position) {
 //                Intent l = new Intent(getActivity(), Farmer_detail.class);
 //                String data = new Gson().toJson(ins.get(position));
 //                l.putExtra("Details",data );
 //                startActivity(l);
-
-            }
+//                Toast.makeText(getApplicationContext(),"Hello Javatpoint", Toast.LENGTH_SHORT).show();
+//            }
         }));
 
         return view;
     }
 
-    public void getInsurance() {
+    public void getSales() {
         try {
             adapter = new SellProduceAdapter(getActivity(), ins);
             recyclerView.setAdapter(adapter);
             ins.clear();
             ins.addAll(couchdbSellProduce.allCrops());
-//            Log.e("TAG",ins.toString());
             adapter.notifyDataSetChanged();
             if (ins.isEmpty()) {
                 _RecyclerViewLayout.setVisibility(View.GONE);

@@ -6,16 +6,11 @@
     android:background="?selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:orientation="horizontal"
-    android:paddingBottom="@dimen/padding_list_row"
-    android:paddingLeft="?listPreferredItemPaddingLeft"
-    android:paddingRight="?listPreferredItemPaddingRight"
-    android:paddingTop="@dimen/padding_list_row">
+    android:orientation="horizontal">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -23,7 +18,8 @@
             android:layout_toRightOf="@+id/image"
             android:orientation="vertical"
             android:padding="@dimen/cardview_default_radius"
-            android:paddingLeft="30dp">
+            android:paddingLeft="30dp"
+            android:layout_margin="@dimen/activity_horizontal_margin">
 
             <TextView
                 android:id="@+id/market"
@@ -32,7 +28,8 @@
                 android:layout_centerInParent="true"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="18dp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/commodity"
@@ -41,16 +38,16 @@
                 android:layout_centerInParent="true"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="14dp" />
 
-            <TextView
-                android:id="@+id/unit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="15dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/unit"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:text=""-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="14dp" />-->
 
             <TextView
                 android:id="@+id/wPrice"
@@ -59,7 +56,7 @@
                 android:layout_centerInParent="true"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/rPrice"
@@ -68,7 +65,7 @@
                 android:layout_centerInParent="true"
                 android:text=""
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="14dp" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

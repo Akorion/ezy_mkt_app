@@ -25,6 +25,11 @@ import com.example.raphael.ezyagric.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.joda.time.DateMidnight;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
+import org.joda.time.LocalDate;
+
 import java.util.ArrayList;
 
 public class WeekTwoFragment extends Fragment {
@@ -83,7 +88,12 @@ public class WeekTwoFragment extends Fragment {
             adapter = new MarketInfoAdapter(getActivity(), ins);
             recyclerView.setAdapter(adapter);
             ins.clear();
-            ins.addAll(couchdbMarketInfo.allCrops());
+
+            DateTime input = new DateTime();
+            final LocalDate startOfWeek = new LocalDate(input.minusWeeks(1).withDayOfWeek(DateTimeConstants.MONDAY));
+            final LocalDate endOfWeek = startOfWeek.plusDays(6);
+
+            ins.addAll(couchdbMarketInfo.allCrops(startOfWeek, endOfWeek));
             Log.e("TAG",ins.toString());
             adapter.notifyDataSetChanged();
             if (ins.isEmpty()) {

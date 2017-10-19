@@ -16,10 +16,17 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import net.danlew.android.joda.DateUtils;
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import org.joda.time.DateMidnight;
+import org.joda.time.LocalDate;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -40,20 +47,33 @@ public class CouchdbMarketInfo {
         couchdbManager = new CouchdbManager(c, DOC_TYPE, VIEW_NAME);
     }
 
-    public List<JsonObject> allCrops() throws CouchbaseLiteException {
+    public List<JsonObject> allCrops(LocalDate start, LocalDate end) throws CouchbaseLiteException {
         ProgressDialog p = couchdbManager.showLoadingSpinner("Querying");
         QueryEnumerator res = couchdbManager.viewQuery().run();
 
         List<JsonObject> farmers = new ArrayList<>();
-
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
 
         for (Iterator<QueryRow> it = res; it.hasNext(); ) {
             QueryRow row = it.next();
+
             try {
-                JsonElement element = new Gson().fromJson (new Gson().toJson(row.getKey()), JsonElement.class);
+                JsonElement element = new Gson().fromJson(new Gson().toJson(row.getKey()), JsonElement.class);
                 JsonObject jsonObj = element.getAsJsonObject();
-                Log.e("MARKET",jsonObj.toString());
-                farmers.add(jsonObj);
+                DateUtils date = new DateUtils();
+
+                Date d = formatter.parse(jsonObj.get("date").getAsString());
+
+                Log.e("break\n","______________");
+//                Log.e("MARKET info", jsonObj.toString());
+//                Log.e("Date check",d.toString());
+//                Log.e("Start date", start.toDate().toString());
+//                Log.e("End date", end.toDate().toString());
+
+                if ((start.toDate().compareTo(d) * d.compareTo(end.toDate())) >= 0) {
+                    farmers.add(jsonObj);
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -61,7 +81,7 @@ public class CouchdbMarketInfo {
         }
 
         p.dismiss();
-        Log.e(TAG,farmers.toString());
+        Log.e(TAG, farmers.toString());
         return farmers;
 
     }

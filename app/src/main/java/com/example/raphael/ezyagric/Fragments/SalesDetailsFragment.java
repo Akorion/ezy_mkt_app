@@ -22,14 +22,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class SalesDetailsFragment extends Fragment {
-    public TextView Crop,Variety, Quantity, Price,Description, DATEPOSTED,LOCATION;
+    public TextView Crop, Variety, Quantity, Price, Description, DATEPOSTED, LOCATION;
     public ImageView imageView;
-
 
     public SalesDetailsFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,28 +40,28 @@ public class SalesDetailsFragment extends Fragment {
         Context context = getActivity().getApplicationContext();
 
 
-        Crop = (TextView) view.findViewById(R.id.text1);
-        Variety = (TextView) view.findViewById(R.id.text2);
-        Quantity = (TextView) view.findViewById(R.id.text3);
-        Price = (TextView) view.findViewById(R.id.text4);
-        Description = (TextView) view.findViewById(R.id.text5);
-        DATEPOSTED = (TextView) view.findViewById(R.id.text6);
-        LOCATION = (TextView) view.findViewById(R.id.text7);
+        Crop = (TextView) view.findViewById(R.id.crop);
+        Variety = (TextView) view.findViewById(R.id.variety);
+        Quantity = (TextView) view.findViewById(R.id.quantity);
+        Price = (TextView) view.findViewById(R.id.price);
+        Description = (TextView) view.findViewById(R.id.desc);
+        DATEPOSTED = (TextView) view.findViewById(R.id.date);
+        LOCATION = (TextView) view.findViewById(R.id.location);
 
         //value received from the buy produce details fragment is here
-        String value = getArguments().getString("YourKey");
+        String value = getArguments().getString("Sales_key");
         Log.e("array", value.toString());
         JsonElement element = new Gson().fromJson(value, JsonElement.class);
         JsonObject jsonObj = element.getAsJsonObject();
         Log.e("DATA", jsonObj.toString());
 
-        Crop.setText("Crop: " + jsonObj.get("crop").getAsString());
-        Variety.setText("Variety: " + jsonObj.get("variety").getAsString());
-        Quantity.setText("Available Quantity: " + jsonObj.get("quantity").getAsString());
-        Price.setText("Price: " + jsonObj.get("price").getAsString());
-        Description.setText("Description: " + jsonObj.get("description").getAsString());
-        DATEPOSTED.setText("Date Posted: " + jsonObj.get("time").getAsString());
-        LOCATION.setText("Location: " + jsonObj.get("location").getAsString());
+        Crop.setText(jsonObj.get("crop").getAsString());
+        Variety.setText(jsonObj.get("variety").getAsString());
+        Quantity.setText(jsonObj.get("quantity").getAsString());
+        Price.setText(jsonObj.get("price").getAsString());
+        Description.setText(jsonObj.get("description").getAsString());
+        DATEPOSTED.setText(jsonObj.get("time").getAsString());
+        LOCATION.setText(jsonObj.get("location").getAsString());
 
         Glide.with(context).load(Utils.IMAGE_URLS + jsonObj.get("image").getAsString()).into(imageView);
 
